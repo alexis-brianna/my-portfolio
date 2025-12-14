@@ -83,10 +83,10 @@ function Hero() {
           variants={fadeUp}
           className="text-5xl md:text-6xl font-bold mb-6 leading-tight"
         >
-          Hi, I’m Lexie.
+          Hi, I’m Lexie!
           <br />
           <span className="text-emerald-300">
-            Optimize ⚙️ Empower 🌟 Elevate 🌿
+            Let's Optimize ⚙️ Empower 🌟 Elevate 🌿 Together!
           </span>
         </motion.h1>
 
@@ -94,7 +94,7 @@ function Hero() {
           variants={fadeUp}
           className="text-xl text-zinc-400 max-w-2xl mx-auto"
         >
-          Cloud engineering, automation, and operational excellence — designed
+          Cloud engineering, automation, and operational excellence; designed
           with care for both systems and people.
         </motion.p>
 
@@ -135,9 +135,9 @@ function About() {
           About Me
         </h2>
         <p className="text-zinc-400 leading-relaxed">
-          I’m a cloud-focused engineer who values clarity, stability, and
-          human-centered design. I love building systems that feel quiet when
-          they’re working — because that’s when everything is right.
+          Located in the Denver Metro, I’m a cloud-focused engineer who values clarity, stability, and
+          human-centered design. When I'm not nerding out, I enjoy hiking,
+          painting, learning new skills, and reading. 
         </p>
       </motion.div>
 
@@ -150,22 +150,22 @@ function About() {
 
 const projectData = [
   {
-    title: "Cloud Monitoring Dashboard",
+    title: "Disaster Recovery Dashboard",
     description:
       "Centralized observability improving alert confidence and uptime.",
-    stack: "AWS · Terraform · Grafana",
+    stack: "Backup Radar · Veeam · Datto BCDR",
   },
   {
-    title: "Automated Infrastructure Platform",
+    title: "My Next Venture",
     description:
-      "Repeatable infrastructure workflows reducing toil and error rates.",
-    stack: "Terraform · CI/CD",
+      "What will I do next?",
+    stack: "To be · Determined",
   },
   {
-    title: "Secure Event-Driven Pipeline",
+    title: "Future Adventure",
     description:
-      "Scalable, auditable pipeline built for reliability and trust.",
-    stack: "Python · AWS Lambda · S3",
+      "Where will my mind take me?",
+    stack: "Stay · Tuned",
   },
 ];
 
