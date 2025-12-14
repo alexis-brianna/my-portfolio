@@ -82,7 +82,7 @@ function Fireflies() {
       {Array.from({ length: 18 }).map((_, i) => (
         <span
           key={i}
-          className="absolute w-1.5 h-1.5 rounded-full bg-emerald-300/30 blur-sm animate-firefly"
+          className="absolute w-2 h-2 rounded-full bg-emerald-300/60 blur-[1.5px] animate-firefly"
           style={{
             top: `${Math.random() * 100}%`,
             left: `${Math.random() * 100}%`,
