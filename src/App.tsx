@@ -10,7 +10,7 @@ const fadeUp: Variants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.16, 1, 0.3, 1], // smooth ease-out curve (TS-safe)
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 };
@@ -34,6 +34,7 @@ export default function App() {
       <About />
       <Projects />
       <Skills />
+      <Resume />
       <Contact />
       <Footer />
     </div>
@@ -50,7 +51,7 @@ function Navbar() {
           Lexie.dev
         </span>
         <div className="hidden md:flex space-x-6 text-sm text-zinc-400">
-          {["About", "Projects", "Skills", "Contact"].map((item) => (
+          {["About", "Projects", "Skills", "Resume", "Contact"].map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
@@ -70,7 +71,6 @@ function Navbar() {
 function Hero() {
   return (
     <section className="pt-36 pb-28 text-center relative overflow-hidden">
-      {/* Soft background glow */}
       <div className="absolute inset-0 bg-gradient-to-b from-emerald-400/5 to-transparent pointer-events-none" />
 
       <motion.div
@@ -86,7 +86,7 @@ function Hero() {
           Hi, I’m Lexie.
           <br />
           <span className="text-emerald-300">
-            I build calm, reliable cloud systems.
+            Optimize ⚙️ Empower 🌟 Elevate 🌿
           </span>
         </motion.h1>
 
@@ -94,8 +94,8 @@ function Hero() {
           variants={fadeUp}
           className="text-xl text-zinc-400 max-w-2xl mx-auto"
         >
-          Cloud engineering, automation, and operational excellence —
-          designed with care for both systems and people.
+          Cloud engineering, automation, and operational excellence — designed
+          with care for both systems and people.
         </motion.p>
 
         <motion.div
@@ -136,8 +136,8 @@ function About() {
         </h2>
         <p className="text-zinc-400 leading-relaxed">
           I’m a cloud-focused engineer who values clarity, stability, and
-          human-centered design. I love building systems that feel quiet
-          when they’re working — because that’s when everything is right.
+          human-centered design. I love building systems that feel quiet when
+          they’re working — because that’s when everything is right.
         </p>
       </motion.div>
 
@@ -152,19 +152,19 @@ const projectData = [
   {
     title: "Cloud Monitoring Dashboard",
     description:
-      "A centralized observability layer that improved visibility, alert confidence, and uptime.",
+      "Centralized observability improving alert confidence and uptime.",
     stack: "AWS · Terraform · Grafana",
   },
   {
     title: "Automated Infrastructure Platform",
     description:
-      "Repeatable, auditable infrastructure workflows that reduced manual toil and errors.",
+      "Repeatable infrastructure workflows reducing toil and error rates.",
     stack: "Terraform · CI/CD",
   },
   {
     title: "Secure Event-Driven Pipeline",
     description:
-      "A secure, scalable pipeline built for reliability, traceability, and trust.",
+      "Scalable, auditable pipeline built for reliability and trust.",
     stack: "Python · AWS Lambda · S3",
   },
 ];
@@ -244,13 +244,7 @@ function Skills() {
   );
 }
 
-function SkillBlock({
-  title,
-  items,
-}: {
-  title: string;
-  items: string[];
-}) {
+function SkillBlock({ title, items }: { title: string; items: string[] }) {
   return (
     <motion.div
       variants={fadeUp}
@@ -265,6 +259,39 @@ function SkillBlock({
         ))}
       </ul>
     </motion.div>
+  );
+}
+
+/* ---------------- RESUME ---------------- */
+
+function Resume() {
+  return (
+    <section id="resume" className="max-w-6xl mx-auto px-6 py-28">
+      <motion.h2
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeUp}
+        className="text-3xl font-semibold mb-10 text-emerald-300"
+      >
+        Resume
+      </motion.h2>
+
+      <motion.p variants={fadeUp} className="text-zinc-400 max-w-3xl mb-10">
+        Cloud-focused Systems Administrator with 2+ years of experience
+        supporting hybrid Windows and Microsoft 365 environments. Specialized
+        in Entra ID, automation, and Tier III troubleshooting.
+      </motion.p>
+
+      <motion.a
+        variants={fadeUp}
+        href="/Alexis-Chaffin-Resume.pdf"
+        target="_blank"
+        className="inline-flex px-8 py-4 rounded-xl bg-emerald-400/90 hover:bg-emerald-300 text-zinc-900 font-medium transition"
+      >
+        Download Full Resume (PDF)
+      </motion.a>
+    </section>
   );
 }
 
@@ -283,7 +310,7 @@ function Contact() {
           Let’s Connect
         </h2>
         <p className="text-zinc-400 mb-8">
-          Interested in collaborating, chatting, or just saying hi?
+          Interested in collaborating or just saying hi?
         </p>
         <a
           href="mailto:youremail@example.com"
