@@ -297,6 +297,8 @@ function Resume() {
 
 /* ---------------- CONTACT ---------------- */
 
+/* ---------------- CONTACT ---------------- */
+
 function Contact() {
   return (
     <section id="contact" className="bg-zinc-900 py-28 text-center">
@@ -309,19 +311,35 @@ function Contact() {
         <h2 className="text-3xl font-semibold mb-6 text-emerald-300">
           Let’s Connect
         </h2>
-        <p className="text-zinc-400 mb-8">
-          Interested in collaborating or just saying hi?
+
+        <p className="text-zinc-400 mb-10">
+          Interested in collaborating, chatting, or learning more about my work?
         </p>
-        <a
-          href="mailto:youremail@example.com"
-          className="px-8 py-4 rounded-xl bg-emerald-400/90 hover:bg-emerald-300 text-zinc-900 font-medium transition"
-        >
-          Email Me
-        </a>
+
+        <div className="flex justify-center gap-4 flex-wrap">
+          {/* Email */}
+          <a
+            href="mailto:lexie@pxedust.cc"
+            className="px-8 py-4 rounded-xl bg-emerald-400/90 hover:bg-emerald-300 text-zinc-900 font-medium transition"
+          >
+            Email Me
+          </a>
+
+          {/* LinkedIn */}
+          <a
+            href="https://www.linkedin.com/in/abchaffin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 rounded-xl border border-zinc-700 hover:border-emerald-300 text-zinc-100 transition"
+          >
+            LinkedIn
+          </a>
+        </div>
       </motion.div>
     </section>
   );
 }
+
 
 /* ---------------- FOOTER ---------------- */
 
