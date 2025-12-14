@@ -1,1 +1,23 @@
 @import "tailwindcss";
+@keyframes firefly {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-40px) translateX(20px);
+    opacity: 0.25;
+  }
+  100% {
+    transform: translateY(-80px) translateX(-20px);
+    opacity: 0;
+  }
+}
+
+.animate-firefly {
+  animation: firefly linear infinite;
+};
+

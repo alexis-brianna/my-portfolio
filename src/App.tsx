@@ -5,29 +5,35 @@ import type { Variants } from "framer-motion";
 /* ---------------- ANIMATION VARIANTS ---------------- */
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1],
-    },
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
 const stagger: Variants = {
   hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.12 },
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+
+const buttonMotion = {
+  whileHover: { scale: 1.05, y: -2 },
+  whileTap: { scale: 0.97 },
+  transition: {
+    type: "spring" as const,
+    stiffness: 320,
+    damping: 20,
   },
 };
+
 
 /* ---------------- APP ---------------- */
 
 export default function App() {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 600], [0, -120]);
+  const y = useTransform(scrollY, [0, 600], [0, -80]);
 
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
 
@@ -40,19 +46,21 @@ export default function App() {
 
   return (
     <div className="relative bg-zinc-950 text-zinc-100 min-h-screen font-sans antialiased overflow-hidden">
-      {/* Cursor glow */}
+      {/* Cursor glow (small & soft) */}
       <div
         className="pointer-events-none fixed inset-0 z-0"
         style={{
-          background: `radial-gradient(600px at ${cursor.x}px ${cursor.y}px, rgba(16,185,129,0.15), transparent 70%)`,
+          background: `radial-gradient(220px at ${cursor.x}px ${cursor.y}px, rgba(16,185,129,0.12), transparent 70%)`,
         }}
       />
 
-      {/* Parallax glow */}
+      {/* Parallax ambient glow */}
       <motion.div
         style={{ y }}
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(16,185,129,0.12),transparent_60%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(16,185,129,0.08),transparent_60%)]"
       />
+
+      <Fireflies />
 
       <Navbar />
       <Hero />
@@ -66,17 +74,34 @@ export default function App() {
   );
 }
 
+/* ---------------- FIREFLIES ---------------- */
+
+function Fireflies() {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden z-0">
+      {Array.from({ length: 18 }).map((_, i) => (
+        <span
+          key={i}
+          className="absolute w-1.5 h-1.5 rounded-full bg-emerald-300/30 blur-sm animate-firefly"
+          style={{
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 12}s`,
+            animationDuration: `${18 + Math.random() * 20}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 /* ---------------- NAVBAR ---------------- */
 
 function Navbar() {
   return (
     <nav className="fixed top-0 w-full z-50 bg-zinc-950/70 backdrop-blur border-b border-zinc-800">
       <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 300 }}
-          className="flex items-center gap-3 cursor-pointer"
-        >
+        <motion.div {...buttonMotion} className="flex items-center gap-3">
           <img src="/favicon.jpg" className="w-8 h-8 rounded-lg" />
           <span className="font-semibold tracking-wide text-emerald-300">
             Lexie.dev
@@ -113,27 +138,19 @@ function Hero() {
           </span>
         </motion.h1>
 
-        <motion.p
-          variants={fadeUp}
-          className="text-xl text-zinc-400 max-w-2xl mx-auto"
-        >
+        <motion.p variants={fadeUp} className="text-xl text-zinc-400 max-w-2xl mx-auto">
           Cloud engineering, automation, and operational excellence; designed
           with care for both systems and people.
         </motion.p>
 
         <motion.div variants={fadeUp} className="mt-10 flex justify-center gap-4">
-          <a
+          <motion.a
+            {...buttonMotion}
             href="#projects"
             className="px-6 py-3 rounded-xl bg-emerald-400/90 hover:bg-emerald-300 text-zinc-900 font-medium"
           >
             View My Work
-          </a>
-          <a
-            href="#contact"
-            className="px-6 py-3 rounded-xl border border-zinc-700 hover:border-emerald-300"
-          >
-            Let’s Connect
-          </a>
+          </motion.a>
         </motion.div>
       </motion.div>
     </section>
@@ -145,12 +162,7 @@ function Hero() {
 function About() {
   return (
     <section id="about" className="max-w-5xl mx-auto px-6 py-28">
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeUp}
-      >
+      <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
         <h2 className="text-3xl font-semibold mb-6 text-emerald-300">
           About Me
         </h2>
@@ -169,8 +181,7 @@ function About() {
 const projectData = [
   {
     title: "Disaster Recovery Dashboard",
-    description:
-      "Centralized observability improving alert confidence and uptime.",
+    description: "Centralized observability improving alert confidence and uptime.",
     stack: "Backup Radar · Veeam · Datto BCDR",
   },
   {
@@ -189,31 +200,18 @@ function Projects() {
   return (
     <section id="projects" className="bg-zinc-900 py-28">
       <div className="max-w-6xl mx-auto px-6">
-        <motion.h2
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          className="text-3xl font-semibold mb-14 text-emerald-300"
-        >
+        <motion.h2 variants={fadeUp} initial="hidden" whileInView="visible" className="text-3xl font-semibold mb-14 text-emerald-300">
           Projects
         </motion.h2>
 
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          className="grid md:grid-cols-3 gap-6"
-        >
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" className="grid md:grid-cols-3 gap-6">
           {projectData.map((project) => (
             <motion.div
               key={project.title}
               variants={fadeUp}
-              whileHover={{
-                y: -8,
-                scale: 1.02,
-                boxShadow: "0 20px 40px rgba(16,185,129,0.15)",
-              }}
-              className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800"
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+              className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 hover:border-emerald-400/40"
             >
               <h3 className="text-xl font-medium mb-2">{project.title}</h3>
               <p className="text-zinc-400 mb-4">{project.description}</p>
@@ -262,17 +260,13 @@ function SkillBlock({ title, items }: { title: string; items: string[] }) {
 function Resume() {
   return (
     <section id="resume" className="max-w-6xl mx-auto px-6 py-28">
-      <motion.h2 variants={fadeUp} className="text-3xl font-semibold mb-10 text-emerald-300">
-        Resume
-      </motion.h2>
-
       <motion.a
-        variants={fadeUp}
+        {...buttonMotion}
         href="/Alexis-Chaffin-Resume.pdf"
         target="_blank"
         className="inline-flex px-8 py-4 rounded-xl bg-emerald-400/90 hover:bg-emerald-300 text-zinc-900 font-medium"
       >
-        Download Full Resume (PDF)
+        Download Resume
       </motion.a>
     </section>
   );
@@ -283,26 +277,41 @@ function Resume() {
 function Contact() {
   return (
     <section id="contact" className="bg-zinc-900 py-28 text-center">
-      <motion.h2 variants={fadeUp} className="text-3xl font-semibold mb-6 text-emerald-300">
+      <motion.h2 variants={fadeUp} className="text-3xl font-semibold mb-10 text-emerald-300">
         Let’s Connect
       </motion.h2>
 
-      <div className="flex justify-center gap-4">
-        <a
-          href="mailto:lexie@pxedust.cc"
-          className="px-8 py-4 rounded-xl bg-emerald-400/90 hover:bg-emerald-300 text-zinc-900 font-medium"
-        >
-          Email Me
-        </a>
-        <a
-          href="https://www.linkedin.com/in/abchaffin"
-          target="_blank"
-          className="px-8 py-4 rounded-xl border border-zinc-700 hover:border-emerald-300"
-        >
-          LinkedIn
-        </a>
+      <div className="flex justify-center gap-6">
+        <IconButton href="mailto:lexie@pxedust.cc" label="Email">
+          ✉️
+        </IconButton>
+        <IconButton href="https://www.linkedin.com/in/abchaffin" label="LinkedIn">
+          in
+        </IconButton>
       </div>
     </section>
+  );
+}
+
+function IconButton({
+  href,
+  label,
+  children,
+}: {
+  href: string;
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <motion.a
+      {...buttonMotion}
+      href={href}
+      aria-label={label}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      className="w-14 h-14 rounded-full border border-zinc-700 flex items-center justify-center text-emerald-300 text-xl hover:border-emerald-400"
+    >
+      {children}
+    </motion.a>
   );
 }
 
