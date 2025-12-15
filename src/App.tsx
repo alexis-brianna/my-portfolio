@@ -277,91 +277,133 @@ function SkillBlock({ title, items }: { title: string; items: string[] }) {
 
 /* ---------------- RESUME ---------------- */
 
+/* ---------------- RESUME ---------------- */
+
 function Resume() {
   return (
-    <section id="resume" className="max-w-5xl mx-auto px-6 py-12">
-      <motion.div
+    <section
+      id="resume"
+      className="max-w-5xl mx-auto px-6 py-28 relative z-10"
+    >
+      {/* Section Title */}
+      <motion.h2
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="space-y-10"
+        className="text-3xl font-semibold mb-12 text-violet-300"
       >
-        {/* Header */}
-        <div>
-          <h2 className="text-3xl font-semibold text-indigo-300 mb-2">
-            Professional Profile
-          </h2>
-          <p className="text-zinc-400 text-lg">
-            Cloud Systems Engineer · Automation · Reliability
+        Resume
+      </motion.h2>
+
+      <motion.div
+        variants={stagger}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="space-y-14"
+      >
+        {/* Profile Header */}
+        <motion.div variants={fadeUp}>
+          <h3 className="text-2xl font-medium text-zinc-100">
+            Cloud Systems Engineer
+          </h3>
+          <p className="mt-4 text-zinc-400 leading-relaxed max-w-3xl">
+            Cloud-focused systems engineer with 2+ years of experience
+            supporting hybrid Windows and Microsoft 365 environments.
+            Specialized in identity, automation, observability, and
+            Tier III troubleshooting. Passionate about building calm,
+            reliable systems that quietly do their job well.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Summary */}
-        <p className="text-zinc-400 leading-relaxed max-w-3xl">
-          Cloud-focused Systems Administrator with 2+ years of experience
-          supporting hybrid Windows and Microsoft 365 environments. I specialize
-          in Entra ID, automation, and Tier III troubleshooting, with a strong
-          emphasis on reliability, clarity, and human-centered system design.
-        </p>
-
-        {/* Highlights */}
-        <div>
-          <h3 className="text-lg font-medium text-zinc-200 mb-4">
+        {/* Experience Highlights */}
+        <motion.div variants={fadeUp}>
+          <h4 className="text-lg font-semibold text-violet-300 mb-4">
             Experience Highlights
-          </h3>
-          <ul className="space-y-3 text-zinc-400">
-            <li>• Managed identity, access, and security using Entra ID / Azure AD</li>
-            <li>• Designed automation workflows to reduce operational overhead</li>
-            <li>• Led incident response and root cause analysis for production issues</li>
-            <li>• Improved monitoring and alert confidence across environments</li>
-            <li>• Supported Tier III escalations in hybrid cloud environments</li>
+          </h4>
+          <ul className="space-y-3 text-zinc-400 leading-relaxed">
+            <li>
+              • Designed and supported identity and access workflows using
+              Entra ID and Azure AD
+            </li>
+            <li>
+              • Built automation to reduce manual toil and operational risk
+            </li>
+            <li>
+              • Led incident response and root-cause analysis for
+              production issues
+            </li>
+            <li>
+              • Improved monitoring, alert confidence, and on-call reliability
+            </li>
           </ul>
-        </div>
+        </motion.div>
 
-        {/* Skills */}
-        <div>
-          <h3 className="text-lg font-medium text-zinc-200 mb-4">
+        {/* Core Skills */}
+        <motion.div variants={fadeUp}>
+          <h4 className="text-lg font-semibold text-violet-300 mb-5">
             Core Skills
-          </h3>
+          </h4>
           <div className="flex flex-wrap gap-3">
             {[
               "AWS",
               "Entra ID",
               "Terraform",
               "CI/CD",
-              "Automation",
               "Monitoring",
+              "Automation",
               "Incident Response",
-              "Windows Server",
+              "Windows",
               "Microsoft 365",
             ].map((skill) => (
               <span
                 key={skill}
-                className="px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-sm text-zinc-200"
+                className="px-4 py-2 rounded-full text-sm
+                           bg-zinc-900 border border-zinc-800
+                           text-zinc-200"
               >
                 {skill}
               </span>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Download */}
-        <div className="flex items-center gap-4 pt-2">
+        {/* Actions */}
+        <motion.div
+          variants={fadeUp}
+          className="flex flex-wrap gap-4 pt-6"
+        >
+          {/* Download PDF (reliable) */}
           <a
             href="/Alexis-Chaffin-Resume.pdf"
-            download
-            className="inline-flex px-8 py-4 rounded-xl bg-indigo-400 hover:bg-indigo-300 text-zinc-900 font-medium transition"
+            download="Alexis-Chaffin-Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl
+                       bg-violet-400/90 hover:bg-violet-300
+                       text-zinc-900 font-medium transition"
           >
             Download Full Resume (PDF)
           </a>
-          <span className="text-sm text-zinc-500">
-          </span>
-        </div>
+
+          {/* LinkedIn */}
+          <a
+            href="https://www.linkedin.com/in/abchaffin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl
+                       border border-zinc-700 hover:border-violet-300
+                       text-zinc-100 transition"
+          >
+            View LinkedIn
+          </a>
+        </motion.div>
       </motion.div>
     </section>
   );
 }
+
 
 
 /* ---------------- CONTACT ---------------- */
