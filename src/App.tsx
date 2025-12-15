@@ -276,38 +276,39 @@ function SkillBlock({ title, items }: { title: string; items: string[] }) {
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
-      className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800"
+      whileHover={{
+        y: -10,
+        scale: 1.05,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 420,
+        damping: 22,
+        mass: 0.6,
+      }}
+      className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800
+                 will-change-transform
+                 hover:border-indigo-400/40
+                 hover:shadow-[0_0_0_1px_rgba(165,180,252,0.2),0_25px_50px_-12px_rgba(165,180,252,0.35)]"
     >
       <h3 className="text-lg font-medium mb-4">{title}</h3>
 
-      <ul className="flex flex-wrap gap-3">
+      <ul className="flex flex-wrap gap-3 text-zinc-400">
         {items.map((i) => (
-          <motion.li
+          <li
             key={i}
-            whileHover={{
-              y: -4,
-              scale: 1.12,
-            }}
-            whileTap={{ scale: 0.95 }}
-            transition={{
-              type: "spring",
-              stiffness: 500,
-              damping: 18,
-              mass: 0.4,
-            }}
-            className="px-4 py-2 rounded-full text-sm cursor-default
-                       bg-zinc-900 border border-zinc-800 text-zinc-200
-                       will-change-transform
-                       hover:border-indigo-400/40
-                       hover:shadow-[0_0_0_1px_rgba(165,180,252,0.25),0_12px_24px_rgba(165,180,252,0.35)]"
+            className="px-4 py-2 rounded-full text-sm
+                       bg-zinc-900 border border-zinc-800
+                       text-zinc-200"
           >
             {i}
-          </motion.li>
+          </li>
         ))}
       </ul>
     </motion.div>
   );
 }
+
 
 
 /* ---------------- RESUME ---------------- */
