@@ -115,7 +115,7 @@ function Navbar() {
     <nav className="fixed top-0 w-full z-50 bg-zinc-950/90 border-b border-zinc-800">
       <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <img src="/favicon.jpg" className="w-8 h-8 rounded-lg" />
+          <img src="/favicon.png" className="w-8 h-8 rounded-lg" />
           <span className="font-semibold tracking-wide text-indigo-300">
             Alexis Chaffin
           </span>
@@ -346,11 +346,8 @@ function Resume() {
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="h-px bg-zinc-800" />
-
         {/* Download */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 pt-2">
           <a
             href="/Alexis-Chaffin-Resume.pdf"
             download
@@ -359,13 +356,13 @@ function Resume() {
             Download Full Resume (PDF)
           </a>
           <span className="text-sm text-zinc-500">
-            One-page, ATS-friendly
           </span>
         </div>
       </motion.div>
     </section>
   );
 }
+
 
 /* ---------------- CONTACT ---------------- */
 
