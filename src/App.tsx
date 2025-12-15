@@ -222,22 +222,25 @@ function Projects() {
       <div className="grid md:grid-cols-3 gap-6">
         {projectData.map((p) => (
           <motion.div
-  key={p.title}
-  variants={fadeUp}
-  initial="hidden"
-  whileInView="visible"
-  whileHover={{
-    y: -8,
-    scale: 1.03,
-    boxShadow: "0 20px 40px rgba(165,180,252,0.25)",
-  }}
-  transition={{
-    type: "spring",
-    stiffness: 260,
-    damping: 20,
-  }}
-  className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800"
->
+            key={p.title}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            whileHover={{
+              y: -10,
+              scale: 1.05,
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 420,
+              damping: 22,
+              mass: 0.6,
+            }}
+            className="relative p-6 rounded-2xl bg-zinc-900 border border-zinc-800
+                       will-change-transform
+                       hover:border-indigo-400/40
+                       hover:shadow-[0_0_0_1px_rgba(165,180,252,0.2),0_25px_50px_-12px_rgba(165,180,252,0.35)]"
+          >
             <h3 className="text-xl mb-2">{p.title}</h3>
             <p className="text-zinc-400 mb-4">{p.description}</p>
             <span className="text-sm text-indigo-300">{p.stack}</span>
@@ -247,6 +250,7 @@ function Projects() {
     </section>
   );
 }
+
 
 /* ---------------- SKILLS ---------------- */
 
@@ -275,32 +279,36 @@ function SkillBlock({ title, items }: { title: string; items: string[] }) {
       className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800"
     >
       <h3 className="text-lg font-medium mb-4">{title}</h3>
-      <ul className="flex flex-wrap gap-3">
-  {items.map((i) => (
-    <motion.li
-      key={i}
-      whileHover={{
-        y: -3,
-        scale: 1.08,
-        boxShadow: "0 10px 24px rgba(165,180,252,0.25)",
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 300,
-        damping: 18,
-      }}
-      className="px-4 py-2 rounded-full text-sm
-                 bg-zinc-900 border border-zinc-800
-                 text-zinc-200 cursor-default"
-    >
-      {i}
-    </motion.li>
-  ))}
-</ul>
 
+      <ul className="flex flex-wrap gap-3">
+        {items.map((i) => (
+          <motion.li
+            key={i}
+            whileHover={{
+              y: -4,
+              scale: 1.12,
+            }}
+            whileTap={{ scale: 0.95 }}
+            transition={{
+              type: "spring",
+              stiffness: 500,
+              damping: 18,
+              mass: 0.4,
+            }}
+            className="px-4 py-2 rounded-full text-sm cursor-default
+                       bg-zinc-900 border border-zinc-800 text-zinc-200
+                       will-change-transform
+                       hover:border-indigo-400/40
+                       hover:shadow-[0_0_0_1px_rgba(165,180,252,0.25),0_12px_24px_rgba(165,180,252,0.35)]"
+          >
+            {i}
+          </motion.li>
+        ))}
+      </ul>
     </motion.div>
   );
 }
+
 
 /* ---------------- RESUME ---------------- */
 
