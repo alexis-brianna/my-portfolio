@@ -77,8 +77,8 @@ export default function App() {
 
   return (
     <div className="relative bg-zinc-950 text-zinc-100 min-h-screen font-sans antialiased overflow-hidden">
-      <CursorGlow />
       <Fireflies />
+      <CursorGlow />
 
       <motion.div
         style={{ y: bgY }}
@@ -106,7 +106,7 @@ function Navbar() {
         <div className="flex items-center gap-3">
           <img src="/favicon.jpg" className="w-8 h-8 rounded-lg" />
           <span className="font-semibold tracking-wide text-emerald-300">
-            Lexie.dev
+            Alexis Chaffin - Cloud Engineer
           </span>
         </div>
 
@@ -130,14 +130,15 @@ function Hero() {
       <motion.div variants={stagger} initial="hidden" animate="visible">
         <motion.h1 variants={fadeUp} className="text-5xl md:text-6xl font-bold mb-6">
           Hi, I’m Lexie!
+          
           <br />
           <span className="text-emerald-300">
-            Let’s Optimize ⚙️ Empower 🌟 Elevate 🌿 Together
+            Optimize ⚙️ Empower 🌟 Elevate 🌿
           </span>
         </motion.h1>
 
         <motion.p variants={fadeUp} className="text-xl text-zinc-400 max-w-2xl mx-auto">
-          Cloud engineering, automation, and operational excellence —
+          I specialize in cloud engineering, automation, and operational excellence;
           designed with care for both systems and people.
         </motion.p>
       </motion.div>
@@ -153,8 +154,14 @@ function About() {
       <motion.div variants={fadeUp} initial="hidden" whileInView="visible">
         <h2 className="text-3xl font-semibold mb-6 text-emerald-300">About Me</h2>
         <p className="text-zinc-400 leading-relaxed">
-          Located in the Denver Metro, I’m a cloud-focused engineer who values
-          clarity, stability, and human-centered design.
+          Originally from the Midwestern United States, I came to the Denver area in 2024.
+          When I'm not nerding out on my cloud engineering projects and home lab, you'll
+          likely spot me hiking, reading at the local library, volunteering at the local
+          animal shelter, or painting!
+
+          My love for technology runs deep, and I've been working with it since I was a kid.
+          I want to understand how everything works to make it better for all of us. If my mission
+          interests you, we should connect!
         </p>
       </motion.div>
     </section>
