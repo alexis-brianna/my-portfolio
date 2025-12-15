@@ -236,26 +236,87 @@ function SkillBlock({ title, items }: { title: string; items: string[] }) {
 
 function Resume() {
   return (
-    <section id="resume" className="max-w-6xl mx-auto px-6 py-28 relative z-10">
-      <h2 className="text-3xl font-semibold mb-6 text-emerald-300">Resume</h2>
-
-      <div className="rounded-2xl overflow-hidden border border-emerald-900/40 mb-8">
-        <iframe
-          src="/Alexis-Chaffin-Resume.pdf"
-          className="w-full h-[700px] bg-zinc-900"
-        />
-      </div>
-
-      <a
-        href="/Alexis-Chaffin-Resume.pdf"
-        download
-        className="inline-flex px-8 py-4 rounded-xl bg-emerald-400/90 hover:bg-emerald-300 text-zinc-900 font-medium transition"
+    <section id="resume" className="max-w-5xl mx-auto px-6 py-28 relative z-10">
+      <motion.h2
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        className="text-3xl font-semibold mb-10 text-emerald-300"
       >
-        Download Resume (PDF)
-      </a>
+        Resume
+      </motion.h2>
+
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        className="space-y-12"
+      >
+        {/* Header */}
+        <div>
+          <h3 className="text-2xl font-medium text-zinc-100">
+            Cloud Systems Engineer
+          </h3>
+          <p className="text-zinc-400 mt-2">
+            Cloud-focused Systems Administrator with 2+ years of experience
+            supporting hybrid Windows and Microsoft 365 environments.
+            Specializing in Entra ID, automation, and Tier III troubleshooting.
+          </p>
+        </div>
+
+        {/* Experience */}
+        <div>
+          <h4 className="text-lg font-semibold text-emerald-300 mb-4">
+            Experience Highlights
+          </h4>
+          <ul className="space-y-3 text-zinc-400">
+            <li>• Managed identity, access, and security using Entra ID and Azure AD</li>
+            <li>• Built automation workflows to reduce operational overhead</li>
+            <li>• Led incident response and root cause analysis for production issues</li>
+            <li>• Improved monitoring and alert confidence across environments</li>
+          </ul>
+        </div>
+
+        {/* Skills */}
+        <div>
+          <h4 className="text-lg font-semibold text-emerald-300 mb-4">
+            Core Skills
+          </h4>
+          <div className="flex flex-wrap gap-3">
+            {[
+              "AWS",
+              "Entra ID",
+              "Terraform",
+              "CI/CD",
+              "Monitoring",
+              "Automation",
+              "Incident Response",
+            ].map((skill) => (
+              <span
+                key={skill}
+                className="px-4 py-2 rounded-full bg-emerald-950/40 border border-emerald-900/40 text-sm text-zinc-200"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Download */}
+        <div className="pt-6">
+          <a
+            href="/Alexis-Chaffin-Resume.pdf"
+            download
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-emerald-400/90 hover:bg-emerald-300 text-zinc-900 font-medium transition"
+          >
+            Download Full Resume (PDF)
+          </a>
+        </div>
+      </motion.div>
     </section>
   );
 }
+
 
 /* ---------------- CONTACT ---------------- */
 
