@@ -5,7 +5,7 @@ import type { Variants } from "framer-motion";
 /* ---------------- ANIMATION VARIANTS ---------------- */
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 18 },
   visible: {
     opacity: 1,
     y: 0,
@@ -18,29 +18,6 @@ const stagger: Variants = {
   visible: { transition: { staggerChildren: 0.12 } },
 };
 
-/* ---------------- SECTION WRAPPER ---------------- */
-
-function Section({
-  id,
-  children,
-}: {
-  id?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <motion.section
-      id={id}
-      variants={fadeUp}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-120px" }}
-      className="relative z-10"
-    >
-      {children}
-    </motion.section>
-  );
-}
-
 /* ---------------- CURSOR GLOW ---------------- */
 
 function CursorGlow() {
@@ -49,9 +26,7 @@ function CursorGlow() {
   useEffect(() => {
     const move = (e: MouseEvent) => {
       if (!ref.current) return;
-      ref.current.style.transform = `translate(${e.clientX - 40}px, ${
-        e.clientY - 40
-      }px)`;
+      ref.current.style.transform = `translate(${e.clientX - 40}px, ${e.clientY - 40}px)`;
     };
     window.addEventListener("mousemove", move);
     return () => window.removeEventListener("mousemove", move);
@@ -60,7 +35,7 @@ function CursorGlow() {
   return (
     <div
       ref={ref}
-      className="pointer-events-none fixed top-0 left-0 w-[80px] h-[80px] rounded-full bg-lavender-300/20 blur-3xl z-0"
+      className="pointer-events-none fixed top-0 left-0 w-[80px] h-[80px] rounded-full bg-indigo-400/15 blur-2xl z-0"
     />
   );
 }
@@ -73,19 +48,18 @@ function Fireflies() {
       {Array.from({ length: 22 }).map((_, i) => (
         <motion.span
           key={i}
-          className="absolute w-1.5 h-1.5 rounded-full bg-lavender-300/70 blur-sm"
+          className="absolute w-1.5 h-1.5 rounded-full bg-indigo-300/50"
           initial={{
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight,
-            opacity: 0.4,
           }}
           animate={{
-            y: ["-20px", "20px", "-20px"],
-            x: ["-15px", "15px", "-15px"],
-            opacity: [0.4, 0.9, 0.4],
+            y: [-25, 25, -25],
+            x: [-15, 15, -15],
+            opacity: [0.3, 0.8, 0.3],
           }}
           transition={{
-            duration: 14 + Math.random() * 6,
+            duration: 12 + Math.random() * 6,
             repeat: Infinity,
             ease: "easeInOut",
           }}
@@ -102,36 +76,47 @@ export default function App() {
   const bgY = useTransform(scrollY, [0, 600], [0, -120]);
 
   return (
-    <div className="relative bg-zinc-950 text-zinc-100 min-h-screen overflow-hidden">
+    <div className="relative bg-zinc-950 text-zinc-100 min-h-screen antialiased overflow-hidden">
       <Fireflies />
       <CursorGlow />
 
       <motion.div
         style={{ y: bgY }}
-        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(196,181,253,0.12),transparent_65%)] z-0"
+        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(165,180,252,0.12),transparent_65%)] z-0"
       />
 
       <Navbar />
       <Hero />
+      <Divider />
       <About />
+      <Divider />
       <Projects />
+      <Divider />
       <Skills />
+      <Divider />
       <Resume />
+      <Divider />
       <Contact />
       <Footer />
     </div>
   );
 }
 
+/* ---------------- SHARED ---------------- */
+
+function Divider() {
+  return <div className="h-px bg-zinc-800 my-24 max-w-6xl mx-auto" />;
+}
+
 /* ---------------- NAVBAR ---------------- */
 
 function Navbar() {
   return (
-    <nav className="fixed top-0 w-full z-50 bg-white/5 backdrop-blur-xl border-b border-white/10">
+    <nav className="fixed top-0 w-full z-50 bg-zinc-950/90 border-b border-zinc-800">
       <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <img src="/favicon.png" className="w-8 h-8 rounded-lg" />
-          <span className="font-semibold tracking-wide text-lavender-300">
+          <img src="/favicon.jpg" className="w-8 h-8 rounded-lg" />
+          <span className="font-semibold tracking-wide text-indigo-300">
             Alexis Chaffin
           </span>
         </div>
@@ -141,7 +126,7 @@ function Navbar() {
             <a
               key={id}
               href={`#${id}`}
-              className="hover:text-lavender-300 transition"
+              className="hover:text-indigo-300 transition"
             >
               {id.charAt(0).toUpperCase() + id.slice(1)}
             </a>
@@ -156,16 +141,16 @@ function Navbar() {
 
 function Hero() {
   return (
-    <section className="pt-36 pb-28 text-center relative z-10">
+    <section className="pt-40 pb-32 text-center relative z-10">
       <motion.div variants={stagger} initial="hidden" animate="visible">
         <motion.h1
           variants={fadeUp}
-          className="text-5xl md:text-6xl font-bold mb-6"
+          className="text-5xl md:text-6xl font-bold mb-6 leading-tight"
         >
-          Hi, I’m Lexie!
+          Hi, I’m Lexie.
           <br />
-          <span className="text-lavender-300">
-            Optimize ⚙️ Empower 🌟 Elevate 🌿
+          <span className="text-indigo-300">
+            Optimize · Empower · Elevate
           </span>
         </motion.h1>
 
@@ -173,8 +158,8 @@ function Hero() {
           variants={fadeUp}
           className="text-xl text-zinc-400 max-w-2xl mx-auto"
         >
-          Cloud engineering, automation, and operational excellence — built with
-          care for both systems and people.
+          Cloud engineering, automation, and operational excellence — designed
+          with care for both systems and people.
         </motion.p>
       </motion.div>
     </section>
@@ -185,28 +170,25 @@ function Hero() {
 
 function About() {
   return (
-    <Section id="about">
-      <div className="max-w-5xl mx-auto px-6 py-28 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl">
-        <h2 className="text-3xl font-semibold mb-6 text-lavender-300">
+    <section id="about" className="max-w-5xl mx-auto px-6 py-12">
+      <motion.div variants={fadeUp} initial="hidden" whileInView="visible">
+        <h2 className="text-3xl font-semibold mb-6 text-indigo-300">
           About Me
         </h2>
         <p className="text-zinc-400 leading-relaxed">
-          Cloud-focused engineer based in the Denver metro area. I value clarity,
-          stability, and human-centered design. When I’m not building systems,
-          I’m hiking, painting, volunteering, or learning something new.
+          Originally from the Midwest, I relocated to the Denver area in 2024.
+          I’m a cloud-focused engineer who values clarity, stability, and
+          human-centered design. Outside of tech, I enjoy hiking, reading,
+          volunteering, and painting.
         </p>
-      </div>
-    </Section>
+      </motion.div>
+    </section>
   );
 }
 
 /* ---------------- PROJECTS ---------------- */
 
-const projectData: {
-  title: string;
-  description: string;
-  stack: string;
-}[] = [
+const projectData = [
   {
     title: "Disaster Recovery Dashboard",
     description:
@@ -227,27 +209,33 @@ const projectData: {
 
 function Projects() {
   return (
-    <Section id="projects">
-      <div className="max-w-6xl mx-auto px-6 py-28">
-        <h2 className="text-3xl font-semibold mb-12 text-lavender-300">
-          Projects
-        </h2>
+    <section id="projects" className="max-w-6xl mx-auto px-6 py-12">
+      <motion.h2
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        className="text-3xl font-semibold mb-12 text-indigo-300"
+      >
+        Projects
+      </motion.h2>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {projectData.map((p) => (
-            <motion.div
-              key={p.title}
-              whileHover={{ y: -6, scale: 1.02 }}
-              className="p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10"
-            >
-              <h3 className="text-xl mb-2">{p.title}</h3>
-              <p className="text-zinc-400 mb-4">{p.description}</p>
-              <span className="text-sm text-lavender-300">{p.stack}</span>
-            </motion.div>
-          ))}
-        </div>
+      <div className="grid md:grid-cols-3 gap-6">
+        {projectData.map((p) => (
+          <motion.div
+            key={p.title}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            whileHover={{ y: -6 }}
+            className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800"
+          >
+            <h3 className="text-xl mb-2">{p.title}</h3>
+            <p className="text-zinc-400 mb-4">{p.description}</p>
+            <span className="text-sm text-indigo-300">{p.stack}</span>
+          </motion.div>
+        ))}
       </div>
-    </Section>
+    </section>
   );
 }
 
@@ -255,41 +243,35 @@ function Projects() {
 
 function Skills() {
   return (
-    <Section id="skills">
-      <div className="max-w-6xl mx-auto px-6 py-28">
-        <h2 className="text-3xl font-semibold mb-12 text-lavender-300">
-          Skills
-        </h2>
+    <section id="skills" className="max-w-6xl mx-auto px-6 py-12">
+      <h2 className="text-3xl font-semibold mb-12 text-indigo-300">
+        Skills
+      </h2>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          <SkillBlock title="Cloud" items={["AWS", "IAM", "Networking"]} />
-          <SkillBlock title="Automation" items={["Terraform", "CI/CD"]} />
-          <SkillBlock
-            title="Reliability"
-            items={["Observability", "Incident Response"]}
-          />
-        </div>
+      <div className="grid md:grid-cols-3 gap-6">
+        <SkillBlock title="Cloud" items={["AWS", "IAM", "Monitoring", "Networking"]} />
+        <SkillBlock title="Automation" items={["Terraform", "CI/CD", "Scripting"]} />
+        <SkillBlock title="Reliability" items={["Observability", "Incident Response", "Optimization"]} />
       </div>
-    </Section>
+    </section>
   );
 }
 
-function SkillBlock({
-  title,
-  items,
-}: {
-  title: string;
-  items: string[];
-}) {
+function SkillBlock({ title, items }: { title: string; items: string[] }) {
   return (
-    <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10">
-      <h3 className="text-lg mb-4">{title}</h3>
+    <motion.div
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800"
+    >
+      <h3 className="text-lg font-medium mb-4">{title}</h3>
       <ul className="space-y-2 text-zinc-400">
         {items.map((i) => (
           <li key={i}>• {i}</li>
         ))}
       </ul>
-    </div>
+    </motion.div>
   );
 }
 
@@ -297,31 +279,25 @@ function SkillBlock({
 
 function Resume() {
   return (
-    <Section id="resume">
-      <div className="max-w-5xl mx-auto px-6 py-28">
-        <h2 className="text-3xl font-semibold mb-10 text-lavender-300">
-          Profile
-        </h2>
+    <section id="resume" className="max-w-5xl mx-auto px-6 py-12">
+      <h2 className="text-3xl font-semibold mb-6 text-indigo-300">
+        Resume
+      </h2>
 
-        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-10 space-y-12">
-          <p className="text-zinc-400 max-w-3xl">
-            Cloud-focused Systems Engineer with 2+ years of experience supporting
-            hybrid Windows and Microsoft 365 environments. Specialized in Entra
-            ID, automation, and Tier III troubleshooting.
-          </p>
+      <p className="text-zinc-400 max-w-3xl mb-8">
+        Cloud-focused Systems Administrator with 2+ years of experience
+        supporting hybrid Windows and Microsoft 365 environments. Specialized
+        in Entra ID, automation, and Tier III troubleshooting.
+      </p>
 
-          <div className="h-px bg-gradient-to-r from-transparent via-lavender-300/20 to-transparent" />
-
-          <a
-            href="/Alexis-Chaffin-Resume.pdf"
-            download
-            className="inline-block px-8 py-4 rounded-xl bg-lavender-300 text-zinc-900 font-medium"
-          >
-            Download Resume (PDF)
-          </a>
-        </div>
-      </div>
-    </Section>
+      <a
+        href="/Alexis-Chaffin-Resume.pdf"
+        download
+        className="inline-flex px-8 py-4 rounded-xl bg-indigo-400 hover:bg-indigo-300 text-zinc-900 font-medium transition"
+      >
+        Download Full Resume (PDF)
+      </a>
+    </section>
   );
 }
 
@@ -329,27 +305,20 @@ function Resume() {
 
 function Contact() {
   return (
-    <Section id="contact">
-      <div className="flex justify-center gap-10 py-28">
-        <motion.a
-          whileHover={{ scale: 1.2 }}
-          href="mailto:lexie@pxedust.cc"
-          aria-label="Email"
-          className="text-3xl text-lavender-300"
-        >
+    <section id="contact" className="py-20 text-center">
+      <div className="flex justify-center gap-10 text-3xl text-indigo-300">
+        <motion.a whileHover={{ scale: 1.15 }} href="mailto:lexie@pxedust.cc">
           ✉
         </motion.a>
         <motion.a
-          whileHover={{ scale: 1.2 }}
+          whileHover={{ scale: 1.15 }}
           href="https://www.linkedin.com/in/abchaffin"
           target="_blank"
-          aria-label="LinkedIn"
-          className="text-3xl text-lavender-300"
         >
           in
         </motion.a>
       </div>
-    </Section>
+    </section>
   );
 }
 
