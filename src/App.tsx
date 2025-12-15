@@ -5,7 +5,7 @@ import type { Variants } from "framer-motion";
 /* ---------------- ANIMATION VARIANTS ---------------- */
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 18 },
   visible: {
     opacity: 1,
     y: 0,
@@ -35,8 +35,7 @@ function CursorGlow() {
   return (
     <div
       ref={ref}
-      className="pointer-events-none fixed top-0 left-0 w-[80px] h-[80px]
-                 rounded-full bg-violet-400/20 blur-2xl z-0"
+      className="pointer-events-none fixed top-0 left-0 w-[80px] h-[80px] rounded-full bg-indigo-400/15 blur-2xl z-0"
     />
   );
 }
@@ -46,19 +45,18 @@ function CursorGlow() {
 function Fireflies() {
   return (
     <div className="pointer-events-none fixed inset-0 z-0">
-      {Array.from({ length: 18 }).map((_, i) => (
+      {Array.from({ length: 22 }).map((_, i) => (
         <motion.span
           key={i}
-          className="absolute w-1.5 h-1.5 rounded-full
-                     bg-violet-300/80 blur-sm"
+          className="absolute w-1.5 h-1.5 rounded-full bg-indigo-300/50"
           initial={{
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight,
           }}
           animate={{
-            y: [-20, 20, -20],
-            x: [-12, 12, -12],
-            opacity: [0.3, 0.9, 0.3],
+            y: [-25, 25, -25],
+            x: [-15, 15, -15],
+            opacity: [0.3, 0.8, 0.3],
           }}
           transition={{
             duration: 12 + Math.random() * 6,
@@ -71,26 +69,6 @@ function Fireflies() {
   );
 }
 
-/* ---------------- DATA ---------------- */
-
-const projectData = [
-  {
-    title: "Disaster Recovery Dashboard",
-    description: "Centralized observability improving alert confidence and uptime.",
-    stack: "Backup Radar · Veeam · Datto BCDR",
-  },
-  {
-    title: "My Next Venture",
-    description: "What will I do next?",
-    stack: "To be · Determined",
-  },
-  {
-    title: "Future Adventure",
-    description: "Where will my mind take me?",
-    stack: "Stay · Tuned",
-  },
-];
-
 /* ---------------- APP ---------------- */
 
 export default function App() {
@@ -98,37 +76,47 @@ export default function App() {
   const bgY = useTransform(scrollY, [0, 600], [0, -120]);
 
   return (
-    <div className="relative bg-zinc-950 text-zinc-100 min-h-screen font-sans overflow-hidden">
+    <div className="relative bg-zinc-950 text-zinc-100 min-h-screen antialiased overflow-hidden">
       <Fireflies />
       <CursorGlow />
 
       <motion.div
         style={{ y: bgY }}
-        className="absolute inset-0
-                   bg-[radial-gradient(circle_at_50%_20%,rgba(167,139,250,0.18),transparent_65%)] z-0"
+        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(165,180,252,0.12),transparent_65%)] z-0"
       />
 
       <Navbar />
       <Hero />
+      <Divider />
       <About />
+      <Divider />
       <Projects />
+      <Divider />
       <Skills />
+      <Divider />
       <Resume />
+      <Divider />
       <Contact />
       <Footer />
     </div>
   );
 }
 
+/* ---------------- SHARED ---------------- */
+
+function Divider() {
+  return <div className="h-px bg-zinc-800 my-24 max-w-6xl mx-auto" />;
+}
+
 /* ---------------- NAVBAR ---------------- */
 
 function Navbar() {
   return (
-    <nav className="fixed top-0 w-full z-50 bg-zinc-950/80 backdrop-blur border-b border-zinc-800">
+    <nav className="fixed top-0 w-full z-50 bg-zinc-950/90 border-b border-zinc-800">
       <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <img src="/favicon.jpg" className="w-8 h-8 rounded-lg" />
-          <span className="font-semibold tracking-wide text-violet-300">
+          <img src="/favicon.png" className="w-8 h-8 rounded-lg" />
+          <span className="font-semibold tracking-wide text-indigo-300">
             Alexis Chaffin
           </span>
         </div>
@@ -138,7 +126,7 @@ function Navbar() {
             <a
               key={id}
               href={`#${id}`}
-              className="hover:text-violet-300 transition"
+              className="hover:text-indigo-300 transition"
             >
               {id.charAt(0).toUpperCase() + id.slice(1)}
             </a>
@@ -153,19 +141,25 @@ function Navbar() {
 
 function Hero() {
   return (
-    <section className="pt-36 pb-28 text-center relative z-10">
+    <section className="pt-40 pb-32 text-center relative z-10">
       <motion.div variants={stagger} initial="hidden" animate="visible">
-        <motion.h1 variants={fadeUp} className="text-5xl md:text-6xl font-bold mb-6">
-          Hi, I’m Lexie!
+        <motion.h1
+          variants={fadeUp}
+          className="text-5xl md:text-6xl font-bold mb-6 leading-tight"
+        >
+          Hi, I’m Lexie.
           <br />
-          <span className="text-violet-300">
-            Optimize ⚙️ Empower 🌟 Elevate 🌿
+          <span className="text-indigo-300">
+            Optimize · Empower · Elevate
           </span>
         </motion.h1>
 
-        <motion.p variants={fadeUp} className="text-xl text-zinc-400 max-w-2xl mx-auto">
-          Cloud engineering, automation, and operational excellence —
-          designed with care for both systems and people.
+        <motion.p
+          variants={fadeUp}
+          className="text-xl text-zinc-400 max-w-2xl mx-auto"
+        >
+          Cloud engineering, automation, and operational excellence — designed
+          with care for both systems and people.
         </motion.p>
       </motion.div>
     </section>
@@ -176,13 +170,16 @@ function Hero() {
 
 function About() {
   return (
-    <section id="about" className="max-w-5xl mx-auto px-6 py-28 relative z-10">
+    <section id="about" className="max-w-5xl mx-auto px-6 py-12">
       <motion.div variants={fadeUp} initial="hidden" whileInView="visible">
-        <h2 className="text-3xl font-semibold mb-6 text-violet-300">About Me</h2>
+        <h2 className="text-3xl font-semibold mb-6 text-indigo-300">
+          About Me
+        </h2>
         <p className="text-zinc-400 leading-relaxed">
-          Cloud-focused engineer with a passion for calm, reliable systems.
-          When I’m not working on infrastructure or automation, you’ll
-          usually find me hiking, reading, or painting.
+          Originally from the Midwest, I relocated to the Denver area in 2024.
+          I’m a cloud-focused engineer who values clarity, stability, and
+          human-centered design. Outside of tech, I enjoy hiking, reading,
+          volunteering, and painting.
         </p>
       </motion.div>
     </section>
@@ -191,40 +188,61 @@ function About() {
 
 /* ---------------- PROJECTS ---------------- */
 
+const projectData = [
+  {
+    title: "Disaster Recovery Dashboard",
+    description:
+      "Centralized observability improving alert confidence and uptime.",
+    stack: "Backup Radar · Veeam · Datto BCDR",
+  },
+  {
+    title: "My Next Venture",
+    description: "What will I do next?",
+    stack: "To be · Determined",
+  },
+  {
+    title: "Future Adventure",
+    description: "Where will my mind take me?",
+    stack: "Stay · Tuned",
+  },
+];
+
 function Projects() {
   return (
-    <section id="projects" className="py-28 relative z-10">
-      <div className="max-w-6xl mx-auto px-6">
-        <motion.h2
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          className="text-3xl font-semibold mb-14 text-violet-300"
-        >
-          Projects
-        </motion.h2>
+    <section id="projects" className="max-w-6xl mx-auto px-6 py-12">
+      <motion.h2
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        className="text-3xl font-semibold mb-12 text-indigo-300"
+      >
+        Projects
+      </motion.h2>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {projectData.map((p) => (
-            <motion.div
-              key={p.title}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              whileHover={{
-                y: -8,
-                scale: 1.02,
-                boxShadow: "0 20px 40px rgba(167,139,250,0.2)",
-              }}
-              transition={{ type: "spring", stiffness: 260, damping: 22 }}
-              className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800"
-            >
-              <h3 className="text-xl mb-2">{p.title}</h3>
-              <p className="text-zinc-400 mb-4">{p.description}</p>
-              <span className="text-sm text-violet-300">{p.stack}</span>
-            </motion.div>
-          ))}
-        </div>
+      <div className="grid md:grid-cols-3 gap-6">
+        {projectData.map((p) => (
+          <motion.div
+  key={p.title}
+  variants={fadeUp}
+  initial="hidden"
+  whileInView="visible"
+  whileHover={{
+    y: -8,
+    scale: 1.03,
+    boxShadow: "0 20px 40px rgba(165,180,252,0.25)",
+  }}
+  transition={{
+    type: "spring",
+    stiffness: 260,
+    damping: 20,
+  }}
+  className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800"
+>
+            <h3 className="text-xl mb-2">{p.title}</h3>
+            <p className="text-zinc-400 mb-4">{p.description}</p>
+            <span className="text-sm text-indigo-300">{p.stack}</span>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
@@ -234,8 +252,10 @@ function Projects() {
 
 function Skills() {
   return (
-    <section id="skills" className="max-w-6xl mx-auto px-6 py-28 relative z-10">
-      <h2 className="text-3xl font-semibold mb-14 text-violet-300">Skills</h2>
+    <section id="skills" className="max-w-6xl mx-auto px-6 py-12">
+      <h2 className="text-3xl font-semibold mb-12 text-indigo-300">
+        Skills
+      </h2>
 
       <div className="grid md:grid-cols-3 gap-6">
         <SkillBlock title="Cloud" items={["AWS", "IAM", "Monitoring", "Networking"]} />
@@ -256,69 +276,174 @@ function SkillBlock({ title, items }: { title: string; items: string[] }) {
     >
       <h3 className="text-lg font-medium mb-4">{title}</h3>
       <ul className="flex flex-wrap gap-3">
-        {items.map((i) => (
-          <motion.li
-            key={i}
-            whileHover={{ scale: 1.08, y: -2 }}
-            className="px-4 py-2 rounded-full text-sm
-                       bg-zinc-800 border border-zinc-700 text-zinc-200"
-          >
-            {i}
-          </motion.li>
-        ))}
-      </ul>
+  {items.map((i) => (
+    <motion.li
+      key={i}
+      whileHover={{
+        y: -3,
+        scale: 1.08,
+        boxShadow: "0 10px 24px rgba(165,180,252,0.25)",
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 300,
+        damping: 18,
+      }}
+      className="px-4 py-2 rounded-full text-sm
+                 bg-zinc-900 border border-zinc-800
+                 text-zinc-200 cursor-default"
+    >
+      {i}
+    </motion.li>
+  ))}
+</ul>
+
     </motion.div>
   );
 }
 
 /* ---------------- RESUME ---------------- */
 
+/* ---------------- RESUME ---------------- */
+
 function Resume() {
   return (
-    <section id="resume" className="max-w-5xl mx-auto px-6 py-28 relative z-10">
+    <section
+      id="resume"
+      className="max-w-5xl mx-auto px-6 py-28 relative z-10"
+    >
+      {/* Section Title */}
       <motion.h2
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
+        viewport={{ once: true }}
         className="text-3xl font-semibold mb-12 text-violet-300"
       >
         Resume
       </motion.h2>
 
-      <motion.p variants={fadeUp} className="text-zinc-400 max-w-3xl mb-10">
-        Cloud-focused systems engineer with experience supporting hybrid
-        Windows and Microsoft 365 environments, identity systems,
-        automation, and Tier III troubleshooting.
-      </motion.p>
-
-      <motion.a
-        variants={fadeUp}
-        href="/Alexis-Chaffin-Resume.pdf"
-        download
-        target="_blank"
-        rel="noopener noreferrer"
-        whileHover={{ scale: 1.05, y: -2 }}
-        className="inline-flex px-8 py-4 rounded-xl
-                   bg-violet-400/90 hover:bg-violet-300
-                   text-zinc-900 font-medium transition"
+      <motion.div
+        variants={stagger}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="space-y-14"
       >
-        Download Full Resume (PDF)
-      </motion.a>
+        {/* Profile Header */}
+        <motion.div variants={fadeUp}>
+          <h3 className="text-2xl font-medium text-zinc-100">
+            Cloud Systems Engineer
+          </h3>
+          <p className="mt-4 text-zinc-400 leading-relaxed max-w-3xl">
+            Cloud-focused systems engineer with 2+ years of experience
+            supporting hybrid Windows and Microsoft 365 environments.
+            Specialized in identity, automation, observability, and
+            Tier III troubleshooting. Passionate about building calm,
+            reliable systems that quietly do their job well.
+          </p>
+        </motion.div>
+
+        {/* Experience Highlights */}
+        <motion.div variants={fadeUp}>
+          <h4 className="text-lg font-semibold text-violet-300 mb-4">
+            Experience Highlights
+          </h4>
+          <ul className="space-y-3 text-zinc-400 leading-relaxed">
+            <li>
+              • Designed and supported identity and access workflows using
+              Entra ID and Azure AD
+            </li>
+            <li>
+              • Built automation to reduce manual toil and operational risk
+            </li>
+            <li>
+              • Led incident response and root-cause analysis for
+              production issues
+            </li>
+            <li>
+              • Improved monitoring, alert confidence, and on-call reliability
+            </li>
+          </ul>
+        </motion.div>
+
+        {/* Core Skills */}
+        <motion.div variants={fadeUp}>
+          <h4 className="text-lg font-semibold text-violet-300 mb-5">
+            Core Skills
+          </h4>
+          <div className="flex flex-wrap gap-3">
+            {[
+              "AWS",
+              "Entra ID",
+              "Terraform",
+              "CI/CD",
+              "Monitoring",
+              "Automation",
+              "Incident Response",
+              "Windows",
+              "Microsoft 365",
+            ].map((skill) => (
+              <span
+                key={skill}
+                className="px-4 py-2 rounded-full text-sm
+                           bg-zinc-900 border border-zinc-800
+                           text-zinc-200"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Actions */}
+        <motion.div
+          variants={fadeUp}
+          className="flex flex-wrap gap-4 pt-6"
+        >
+          {/* Download PDF (reliable) */}
+          <a
+            href="/Alexis-Chaffin-Resume.pdf"
+            download="Alexis-Chaffin-Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl
+                       bg-violet-400/90 hover:bg-violet-300
+                       text-zinc-900 font-medium transition"
+          >
+            Download Full Resume (PDF)
+          </a>
+
+          {/* LinkedIn */}
+          <a
+            href="https://www.linkedin.com/in/abchaffin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl
+                       border border-zinc-700 hover:border-violet-300
+                       text-zinc-100 transition"
+          >
+            View LinkedIn
+          </a>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
+
+
 
 /* ---------------- CONTACT ---------------- */
 
 function Contact() {
   return (
-    <section id="contact" className="py-28 text-center relative z-10">
-      <div className="flex justify-center gap-10 text-3xl text-violet-300">
-        <motion.a whileHover={{ scale: 1.2 }} href="mailto:lexie@pxedust.cc">
+    <section id="contact" className="py-20 text-center">
+      <div className="flex justify-center gap-10 text-3xl text-indigo-300">
+        <motion.a whileHover={{ scale: 1.15 }} href="mailto:lexie@pxedust.cc">
           ✉
         </motion.a>
         <motion.a
-          whileHover={{ scale: 1.2 }}
+          whileHover={{ scale: 1.15 }}
           href="https://www.linkedin.com/in/abchaffin"
           target="_blank"
         >
@@ -333,7 +458,7 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer className="text-center py-8 text-zinc-500 text-sm relative z-10">
+    <footer className="text-center py-8 text-zinc-500 text-sm">
       © {new Date().getFullYear()} Lexie · Built with care
     </footer>
   );
