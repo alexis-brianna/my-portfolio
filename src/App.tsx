@@ -280,23 +280,89 @@ function SkillBlock({ title, items }: { title: string; items: string[] }) {
 function Resume() {
   return (
     <section id="resume" className="max-w-5xl mx-auto px-6 py-12">
-      <h2 className="text-3xl font-semibold mb-6 text-indigo-300">
-        Resume
-      </h2>
-
-      <p className="text-zinc-400 max-w-3xl mb-8">
-        Cloud-focused Systems Administrator with 2+ years of experience
-        supporting hybrid Windows and Microsoft 365 environments. Specialized
-        in Entra ID, automation, and Tier III troubleshooting.
-      </p>
-
-      <a
-        href="/Alexis-Chaffin-Resume.pdf"
-        download
-        className="inline-flex px-8 py-4 rounded-xl bg-indigo-400 hover:bg-indigo-300 text-zinc-900 font-medium transition"
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="space-y-10"
       >
-        Download Full Resume (PDF)
-      </a>
+        {/* Header */}
+        <div>
+          <h2 className="text-3xl font-semibold text-indigo-300 mb-2">
+            Professional Profile
+          </h2>
+          <p className="text-zinc-400 text-lg">
+            Cloud Systems Engineer · Automation · Reliability
+          </p>
+        </div>
+
+        {/* Summary */}
+        <p className="text-zinc-400 leading-relaxed max-w-3xl">
+          Cloud-focused Systems Administrator with 2+ years of experience
+          supporting hybrid Windows and Microsoft 365 environments. I specialize
+          in Entra ID, automation, and Tier III troubleshooting, with a strong
+          emphasis on reliability, clarity, and human-centered system design.
+        </p>
+
+        {/* Highlights */}
+        <div>
+          <h3 className="text-lg font-medium text-zinc-200 mb-4">
+            Experience Highlights
+          </h3>
+          <ul className="space-y-3 text-zinc-400">
+            <li>• Managed identity, access, and security using Entra ID / Azure AD</li>
+            <li>• Designed automation workflows to reduce operational overhead</li>
+            <li>• Led incident response and root cause analysis for production issues</li>
+            <li>• Improved monitoring and alert confidence across environments</li>
+            <li>• Supported Tier III escalations in hybrid cloud environments</li>
+          </ul>
+        </div>
+
+        {/* Skills */}
+        <div>
+          <h3 className="text-lg font-medium text-zinc-200 mb-4">
+            Core Skills
+          </h3>
+          <div className="flex flex-wrap gap-3">
+            {[
+              "AWS",
+              "Entra ID",
+              "Terraform",
+              "CI/CD",
+              "Automation",
+              "Monitoring",
+              "Incident Response",
+              "Windows Server",
+              "Microsoft 365",
+            ].map((skill) => (
+              <span
+                key={skill}
+                className="px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-sm text-zinc-200"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="h-px bg-zinc-800" />
+
+        {/* Download */}
+        <div className="flex items-center gap-4">
+          <a
+            href="/Alexis-Chaffin-Resume.pdf"
+            download
+            className="inline-flex px-8 py-4 rounded-xl bg-indigo-400 hover:bg-indigo-300 text-zinc-900 font-medium transition"
+          >
+            Download Full Resume (PDF)
+          </a>
+          <span className="text-sm text-zinc-500">
+            One-page, ATS-friendly
+          </span>
+        </div>
+      </motion.div>
     </section>
   );
 }
