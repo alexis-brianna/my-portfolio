@@ -312,9 +312,6 @@ function SkillBlock({ title, items }: { title: string; items: string[] }) {
 }
 
 
-
-/* ---------------- RESUME ---------------- */
-
 /* ---------------- RESUME ---------------- */
 
 function Resume() {
@@ -460,6 +457,13 @@ function Contact() {
         >
           in
         </motion.a>
+        <motion.a
+          whileHover={{ scale: 1.15 }}
+          href="https://github.com/alexis-brianna"
+          target="_blank"
+        >
+          git
+</motion.a>
       </div>
     </section>
   );
@@ -470,7 +474,7 @@ function Contact() {
 function Footer() {
   return (
     <footer className="text-center py-8 text-zinc-500 text-sm">
-      © {new Date().getFullYear()} Lexie · Built with care
+      © {new Date().getFullYear()} Lexie · Built with 💜 & 🧋
     </footer>
   );
 }
