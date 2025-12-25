@@ -445,39 +445,40 @@ function Resume() {
 /* ---------------- CONTACT ---------------- */
 
 function Contact() {
-  // Define the lavender color once to keep it consistent
   const iconStyle = { color: "#D1D1F7" }; 
 
   return (
-    <section id="contact" className="py-20 text-center">
-      <div className="flex justify-center gap-10 text-4xl">
+    // Added 'relative' and 'z-10' to ensure this section sits on top
+    <section id="contact" className="relative z-10 py-20 text-center">
+      {/* Added 'pointer-events-auto' to ensure the container allows clicks */}
+      <div className="flex justify-center gap-10 text-4xl pointer-events-auto">
         
-        {/* Email Icon */}
         <motion.a 
-          whileHover={{ scale: 1.2, color: "#A78BFA" }} 
+          whileHover={{ scale: 1.2 }} 
           href="mailto:lexie@pxedust.cc"
+          className="cursor-pointer" // Forces the 'hand' icon to appear
         >
-          <FaEnvelope style={iconStyle} title="Email Me" />
+          <FaEnvelope style={iconStyle} />
         </motion.a>
 
-        {/* LinkedIn Icon */}
         <motion.a
-          whileHover={{ scale: 1.2, color: "#A78BFA" }}
+          whileHover={{ scale: 1.2 }}
           href="https://www.linkedin.com/in/abchaffin"
           target="_blank"
           rel="noopener noreferrer"
+          className="cursor-pointer"
         >
-          <FaLinkedin style={iconStyle} title="LinkedIn Profile" />
+          <FaLinkedin style={iconStyle} />
         </motion.a>
 
-        {/* GitHub Icon */}
         <motion.a
-          whileHover={{ scale: 1.2, color: "#A78BFA" }}
+          whileHover={{ scale: 1.2 }}
           href="https://github.com/alexis-brianna"
           target="_blank"
           rel="noopener noreferrer"
+          className="cursor-pointer"
         >
-          <FaGithub style={iconStyle} title="GitHub Profile" />
+          <FaGithub style={iconStyle} />
         </motion.a>
 
       </div>
