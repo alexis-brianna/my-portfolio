@@ -147,7 +147,7 @@ function Hero() {
           variants={fadeUp}
           className="text-5xl md:text-6xl font-bold mb-6 leading-tight"
         >
-          Hi, I’m Lexie.
+          👋 Hi, I’m Lexie.
           <br />
           <span className="text-indigo-300">
             Optimize · Empower · Elevate
@@ -158,8 +158,10 @@ function Hero() {
           variants={fadeUp}
           className="text-xl text-zinc-400 max-w-2xl mx-auto"
         >
-          Cloud engineering, automation, and operational excellence — designed
-          with care for both systems and people.
+          I am a builder, an orchestrator, and a problem-solver who believes that technology 
+          should serve people; not the other way around. My career is defined by a simple mission: 
+          Automate the routine to protect the critical.
+
         </motion.p>
       </motion.div>
     </section>
@@ -190,20 +192,20 @@ function About() {
 
 const projectData = [
   {
-    title: "Disaster Recovery Dashboard",
+    title: "Scalable AWS Architecture via Terraform",
     description:
-      "Centralized observability improving alert confidence and uptime.",
-    stack: "Backup Radar · Veeam · Datto BCDR",
+      "Moving away from manual 'Point-and-Click' configuration to define a secure, repeatable AWS environment.",
+    stack: "AWS EC2 · Terraform · GitHub · VSCode",
   },
   {
-    title: "My Next Venture",
-    description: "What will I do next?",
-    stack: "To be · Determined",
+    title: "Zero-Trust Linux Hardening",
+    description: "Applying automated security baselines to Red Hat Enterprise Linux. Using Ansible playbooks to enforce SSH hardening, firewall configurations, and identity registration, transforming a 'vanilla' OS into an enterprise-ready, secured node in minutes.",
+    stack: "Ansible · RHEL 9 · YAML · OpenSSH · Firewalld",
   },
   {
-    title: "Future Adventure",
-    description: "Where will my mind take me?",
-    stack: "Stay · Tuned",
+    title: "Self-Healing Systems",
+    description: "Engineering a custom deployment and remediation pipeline that turned a 4-hour manual process into a 90-minute automated success.",
+    stack: "Datto RMM · Windows Configuration Designer · PowerShell · Bash",
   },
 ];
 
