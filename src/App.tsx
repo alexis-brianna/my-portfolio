@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
 import { motion, useScroll, useTransform } from "framer-motion";
 import type { Variants } from "framer-motion";
 
@@ -444,26 +445,41 @@ function Resume() {
 /* ---------------- CONTACT ---------------- */
 
 function Contact() {
+  // Define the lavender color once to keep it consistent
+  const iconStyle = { color: "#D1D1F7" }; 
+
   return (
     <section id="contact" className="py-20 text-center">
-      <div className="flex justify-center gap-10 text-3xl text-indigo-300">
-        <motion.a whileHover={{ scale: 1.15 }} href="mailto:lexie@pxedust.cc">
-          ✉
+      <div className="flex justify-center gap-10 text-4xl">
+        
+        {/* Email Icon */}
+        <motion.a 
+          whileHover={{ scale: 1.2, color: "#A78BFA" }} 
+          href="mailto:lexie@pxedust.cc"
+        >
+          <FaEnvelope style={iconStyle} title="Email Me" />
         </motion.a>
+
+        {/* LinkedIn Icon */}
         <motion.a
-          whileHover={{ scale: 1.15 }}
+          whileHover={{ scale: 1.2, color: "#A78BFA" }}
           href="https://www.linkedin.com/in/abchaffin"
           target="_blank"
+          rel="noopener noreferrer"
         >
-          in
+          <FaLinkedin style={iconStyle} title="LinkedIn Profile" />
         </motion.a>
+
+        {/* GitHub Icon */}
         <motion.a
-          whileHover={{ scale: 1.15 }}
+          whileHover={{ scale: 1.2, color: "#A78BFA" }}
           href="https://github.com/alexis-brianna"
           target="_blank"
+          rel="noopener noreferrer"
         >
-          git
-</motion.a>
+          <FaGithub style={iconStyle} title="GitHub Profile" />
+        </motion.a>
+
       </div>
     </section>
   );
